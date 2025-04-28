@@ -1,0 +1,44 @@
+syntax = "proto3";
+option go_package = "notions/";
+
+service Notions {
+    rpc Get (NotionRequest.Get) returns (stream NotionResponse.Get);
+    rpc Add (NotionRequest.Add) returns (NotionResponse.Add);
+    rpc Update (NotionRequest.Update) returns (NotionResponse.Update);
+    rpc Delete (NotionRequest.Delete) returns (NotionResponse.Delete);
+}
+
+
+message NotionRequest {
+    message Get {}
+    message Add {
+        string title = 1;
+        string content = 2;
+    }
+    message Update {
+        string title = 1;
+        string content = 2;
+        int64 id = 3;
+    }
+    message Delete {
+        int64 id = 1;
+    }
+}
+
+message NotionResponse {
+    message Get {
+        string title = 1;
+        string content = 2;
+        string author = 3;
+        int64 id = 4;
+    }
+    message Add {
+        int64 id = 1;
+    }
+    message Update {
+        int64 id = 1;
+    }
+    message Delete {
+        int64 id = 1;
+    }
+}
